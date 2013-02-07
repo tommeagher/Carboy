@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+
+<div class="row">
+<div class="span7">
+{% if session.logged_in %}
+{% for entry in entries %}
+<div class="well">
+<h2>{{ entry.title }}</h2>{{ entry.subhed|safe }}<br>
+<p>{{ entry.text|safe }}</p>
+<p>Date: {{ entry.publishdate }}
+<p>Stage: {{ entry.stage }}
+<h4>{{entry.private}}</h4> <a href="entries/{{ entry.slug }}.html">Permalink</a>
+</div>
+{% else %}
+<em>Unbelievable. No entries here so far. Must be too busy drinking beer instead of brewing it.</em>
+{% endfor %}</div>
+<div class="span3">
+<div style="float: right; margin: 10px">
+ <form action="{{ url_for('add_entry') }}" method=post>
+   <dl>
+   <dd><input type=text size=30 name=title placeholder="Title">
+   <dd><input type=text name=subhed placeholder="Subhed"></textarea>
+   <dd><textarea name=text rows=5 cols=40 placeholder="Text goes here, dummy. Pics can go 800 px wide."></textarea>
+   <dt>Log date (mm-dd-yyyy):
+   <dd><input type=date name=publishdate>
+   <dd><select name=stage>
+<option value="Thirsty" selected>Thirsty</option>
+<option value="Brew_day">Brew day</option>
+<option value="Primary">Primary fermentation</option>
+<option value="Secondary">Secondary fermentation</option>
+<option value="Bottling">Bottling</option>
+<option value="Enjoying">Enjoying</option></select>
+
+   <dd><select name="private">
+<option value="Public" selected>Public</option>
+<option value="Private">Private</option></select>
+   <dd><input type=submit class="btn btn-primary" value=Share>
+   </dl>
+  </form>
+  </div>
+</div>
+{% else %}
+<div class="span9">
+{% for entry in entries %}
+{% if entry.private != "Private" and entry.private != "private" %}
+<div class="well">
+<h2>{{ entry.title }}</h2>{{ entry.subhed|safe }}<br>
+<p>{{ entry.text|safe }}</p>
+<p>Date: {{ entry.publishdate }}
+<p>Stage: {{ entry.stage }}
+<h4>{{entry.private}}</h4> <a href="entries/{{ entry.slug }}.html">Permalink</a>
+</div>
+{% endif %}
+{% else %}
+<em>Unbelievable. No entries here so far. Must be too busy drinking beer instead of brewing it.</em>
+</div>
+
+{% endfor %}
+{% endif %}
+</div>
+</div>
+</div>
+{% endblock %}

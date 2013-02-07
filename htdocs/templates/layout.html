@@ -1,0 +1,96 @@
+<!doctype html>
+<head>
+<title>Carboy, a homebrewing blog</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-responsive.css') }}">
+<style type="text/css">
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #fffffff;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<div class="span12">
+<center><h1><a style="text-decoration:none; color:#000000" href="/">Ideas</a></h1></center>
+<center> <h4> A place to share my homebrewing misadventures</h4></center>
+<ul class="nav nav-list">
+  <li class="divider"></li>
+</ul>
+</div>
+</div>
+<div class="row">
+<div class="span2"></div>
+<div class="span8">  
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success"><div class=flash>{{ message }}</div></div>
+  {% endfor %}</div>
+<!-- <div class=page> -->
+<div class="span2">
+<!--  <div class=metanav> -->
+<center>  {% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+  {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+  {% endif %}</center>
+</div></div>
+
+
+<div class="row">
+<div class="span1"></div>
+<div class="span9">
+{% block body %} {% endblock %}</div>
+</div>
+
+
+</div>
+
+
+</div>
+    <div id="footer">
+      <div class="container">
+      <center>&nbsp;
+      <p class="muted credit"><a href="{{ url_for('colophon') }}">Colophon</a></center>
+       </p>
+      </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+

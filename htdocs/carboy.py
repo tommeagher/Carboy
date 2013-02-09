@@ -90,9 +90,8 @@ def make_edit():
         abort(401)
     g.db.execute('update entries set title=?, subhed=?, text=?, publishdate=?, stage=?, private=? where slug=?', [request.form['title'], request.form['subhed'], request.form['text'], request.form['publishdate'], request.form['stage'], request.form['private'], request.form['slug']])
     g.db.commit()
-    slug=request.form['slug']
     flash('Entry was successfully edited')
-    return redirect(url_for('show_entry', slug=slug))
+    return redirect(url_for('show_entries'))
 
 @app.route('/delete/<slug>.html')
 def delete_page(slug):

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+<div class="container">
+<div class="row">
+<div class="span3"></div>
+<div class="span5">
+<div style="margin: 10px">
+<form action="{{ url_for('make_edit', slug=entry.slug )}}" method=post class=edit-entry>
+   <dl>
+   <dt>Title:
+   <dd><input type=text size="35" name=title value="{{ entry.title }}">
+   <dt>Subhed:
+   <dd><input type=text name=subhed value="{{ entry.subhed }}"></textarea>
+   <dt>Log date (mm-dd-yyyy):
+   <dd><input type=text name=publishdate value="{{ entry.publishdate }}">
+   <dt>Stage:
+   <dd><select name="stage">
+   <option value="{{entry.stage}}" selected>{{ entry.stage }}</option>
+{% if entry.stage == "Thirsty" %}
+<option value="Brewing">Brewing</option>
+<option value="Primary">Primary</option>
+<option value="Secondary">Secondary</option>
+<option value="Bottling">Bottling</option>
+<option value="Enjoying">Enjoying</option>
+{% elif entry.stage == "Brewing" %}
+<option value="Thirsty">Thirsty</option>
+<option value="Primary">Primary</option>
+<option value="Secondary">Secondary</option>
+<option value="Bottling">Bottling</option>
+<option value="Enjoying">Enjoying</option>
+{% elif entry.stage == "Primary" %}
+<option value="Thirsty">Thirsty</option>
+<option value="Brewing">Brewing</option>
+<option value="Secondary">Secondary</option>
+<option value="Bottling">Bottling</option>
+<option value="Enjoying">Enjoying</option>
+{% elif entry.stage == "Secondary" %}
+<option value="Thirsty">Thirsty</option>
+<option value="Brewing">Brewing</option>
+<option value="Primary">Primary</option>
+<option value="Bottling">Bottling</option>
+<option value="Enjoying">Enjoying</option>
+{% elif entry.stage == "Bottling" %}
+<option value="Thirsty">Thirsty</option>
+<option value="Brewing">Brewing</option>
+<option value="Primary">Primary</option>
+<option value="Secondary">Secondary</option>
+<option value="Enjoying">Enjoying</option>
+{% else %}
+<option value="Thirsty">Thirsty</option>
+<option value="Brewing">Brewing</option>
+<option value="Primary">Primary</option>
+<option value="Secondary">Secondary</option>
+<option value="Bottling">Bottling</option>
+{% endif %}
+</select>
+   <dt>Text:
+   <dd><textarea rows=5 cols=40 name=text value="{{ entry.text }}">{{ entry.text }}</textarea>
+   <dt>Public/Private:
+   <dd><select name="private" value="{{ entry.private }}">
+   <option value="{{ entry.private }}" selected>{{entry.private}}</option>
+{% if entry.private == "Public" %}
+<option value="Private">Private</option>
+{% else %}
+<option value="Public">Public</option>
+{% endif %}
+</select>
+<input type="hidden" name="slug" value="{{ entry.slug }}" /><br />
+<br>
+   <dd><input type=submit class="btn btn-primary" value=Confirm>
+   | <input type="button" class="btn btn-primary" value="Cancel"
+onclick="document.location='/';">
+   </dl>
+  </form>
+  </div>
+  </div>
+   </div>
+  </div>
+  {% else %}
+  
+<em>So sorry. You must be logged in to edit an entry. Try again.</em>
+{% endif %}
+{% endblock %}

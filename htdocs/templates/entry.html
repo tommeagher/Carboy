@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+<div class="span9">
+<div class="well">
+{% if entry.private == "Private" or entry.private=="private" %}
+{% if session.logged_in %}
+<h2>{{ entry.title }}</h2>
+<h4><i>{{ entry.subhed|safe }}</i></h4><br>
+<p>{{ entry.text|safe }}</p>
+<p>By Tom on {{ entry.publishdate }}</p>
+<p>Stage: {{ entry.stage }}</p>
+<font color="red">Private</font></p>
+<br>
+<a href="/">Back to more ideas</a>
+{% else %}
+<em>So sorry. You must be logged in to view a private entry. Try again.</em>
+{% endif %}
+{% elif entry.private != "Private" or entry.private!="private" %}
+<h2>{{ entry.title }}</h2>
+<h4><i>{{ entry.subhed|safe }}</i></h4><br>
+<p>{{ entry.text|safe }}</p>
+<p>By Tom on {{ entry.publishdate }}</p>
+<p>Stage: {{ entry.stage }}</p>
+<br>
+<a href="/">Back to more ideas</a>
+{% endif %}
+</div>
+</div>
+</div>
+{% endblock %}

@@ -11,7 +11,10 @@
 <p>{{ entry.text|safe }}</p>
 <p>Date: {{ entry.publishdate }}
 <p>Stage: {{ entry.stage }}
-<h4>{{entry.private}}</h4> <a href="entries/{{ entry.slug }}.html">Permalink</a>
+<h4>{{entry.private}}</h4>
+<a href="entries/{{ entry.slug }}.html">Permalink</a>
+| <a href="/edit/{{ entry.slug }}.html">Edit this entry</a>
+| <a href="/delete/{{ entry.slug }}.html">Delete this entry</a>
 </div>
 {% else %}
 <em>Unbelievable. No entries here so far. Must be too busy drinking beer instead of brewing it.</em>
@@ -27,9 +30,9 @@
    <dd><input type=date name=publishdate>
    <dd><select name=stage>
 <option value="Thirsty" selected>Thirsty</option>
-<option value="Brew_day">Brew day</option>
-<option value="Primary">Primary fermentation</option>
-<option value="Secondary">Secondary fermentation</option>
+<option value="Brewing">Brewing</option>
+<option value="Primary">Primary</option>
+<option value="Secondary">Secondary</option>
 <option value="Bottling">Bottling</option>
 <option value="Enjoying">Enjoying</option></select>
 

@@ -209,7 +209,7 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #EDFFF5;
+  background-color: @white;
 }
 a {
   color: #0088cc;

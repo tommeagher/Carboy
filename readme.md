@@ -1,6 +1,6 @@
 #Carboy
 
-Carboy, a cousin of the <a href="https://github.com/tommeagher/alva">Alva ideablog</a>, is a nanoblog application built using the Flask Python microframework. Because who really needs another Tumblr?
+Carboy, a sister of the <a href="https://github.com/tommeagher/alva">Alva ideablog</a>, is a nanoblog application built using the Flask Python microframework. Because who really needs another Tumblr?
 
 It is customized, but based on the basic flaskr tutorial (http://flask.pocoo.org/docs/tutorial/introduction/), styled using Twitter's Bootstrap CSS framework (http://twitter.github.com/bootstrap/).
 

@@ -7,7 +7,8 @@
 {% if session.logged_in %}
 {% for entry in entries %}
 <div class="well">
-<h2>{{ entry.title }}</h2>{{ entry.subhed|safe }}<br>
+<h2>{{ entry.title }}</h2>
+<h4><i>{{ entry.subhed|safe }}</i></h4>
 <p>{{ entry.text|safe }}</p>
 <p>Date: {{ entry.publishdate }}
 <p>Stage: {{ entry.stage }}
@@ -49,7 +50,8 @@
 {% for entry in entries %}
 {% if entry.private != "Private" and entry.private != "private" %}
 <div class="well">
-<h2>{{ entry.title }}</h2>{{ entry.subhed|safe }}<br>
+<h2>{{ entry.title }}</h2>
+<h4><i>{{ entry.subhed|safe }}</i></h4>
 <p>{{ entry.text|safe }}</p>
 <p>By Tom on {{ entry.publishdate }}</p>
 <p>Stage: {{ entry.stage }}

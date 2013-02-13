@@ -10,7 +10,7 @@
 <h2>{{ entry.title }}</h2>
 <h4><i>{{ entry.subhed|safe }}</i></h4>
 <p>{{ entry.text|safe }}</p>
-<p>Date: {{ entry.publishdate }}
+<p>By <a href="http://www.twitter.com/ultracasual/" target="_blank">Tom</a> on {{ entry.publishdate }}</p>
 <p>Stage: {{ entry.stage }}
 <h4>{{entry.private}}</h4>
 <a href="entries/{{ entry.slug }}.html">Permalink</a>
@@ -53,13 +53,14 @@
 <h2>{{ entry.title }}</h2>
 <h4><i>{{ entry.subhed|safe }}</i></h4>
 <p>{{ entry.text|safe }}</p>
-<p>By Tom on {{ entry.publishdate }}</p>
+<p>By <a href="http://www.twitter.com/ultracasual/" target="_blank">Tom</a> on {{ entry.publishdate }}</p>
 <p>Stage: {{ entry.stage }}
 <h4>{{entry.private}}</h4> <a href="entries/{{ entry.slug }}.html">Permalink</a>
 </div>
+{% endif %}
 {% else %}
 <center><em>Unbelievable. No entries here so far. Must be too busy drinking beer instead of brewing it.</em></center>
-{% endif %}
+
 </div>
 
 {% endfor %}

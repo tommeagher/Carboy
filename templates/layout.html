@@ -69,17 +69,11 @@
 <div class="row">
 <div class="span2"></div>
 <div class="span8">  
-{% for message in get_flashed_messages() %}
-    <div class="alert alert-success"><div class=flash>{{ message }}</div></div>
-  {% endfor %}</div>
+</div>
 <!-- <div class=page> -->
 <div class="span2">
 <!--  <div class=metanav> -->
-<center>  {% if not session.logged_in %}
-    <a href="{{ url_for('login') }}">log in</a>
-  {% else %}
-    <a href="{{ url_for('logout') }}">log out</a>
-  {% endif %}</center>
+
 </div></div>
 
 
@@ -96,14 +90,9 @@
 </div>
     <div id="footer">
       <div class="container">
-      <center>&nbsp;
-      <p class="muted credit"><a href="{{ url_for('colophon') }}">Colophon</a></center>
-       </p>
+      {% block footer %} {% endblock %}
       </div>
     </div>
 </div>
-
 </body>
 </html>
-
-

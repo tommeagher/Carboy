@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container-fluid">
+
+<div class="row">
+<div class="span9">
+{% if session.logged_in %}
+{% for entry in entries %}
+<div class="well">
+<h2>{{ entry.title }}</h2>
+<h4><i>{{ entry.subhed|safe }}</i></h4>
+<p>{{ entry.text|safe }}</p>
+<p>By <a href="http://www.twitter.com/{{entry.twitter}}">{{ entry.user }}</a> on {{ entry.month }}/{{entry.day}}/{{entry.year}}</p>
+<p>Stage: {{ entry.stage }}</p>
+<h4>{{entry.private}}</h4>
+<a href="/entries/{{ "%s/%s"|format(entry.year, entry.month)+"/"+entry.slug }}.html">Permalink</a>
+| <a href="/admin/edit/?url=%2Fadmin%2Fentry%2F&id={{ entry.id }}">Edit this entry</a>
+</div>
+{% else %}
+<em>Unbelievable. No entries here so far. Must be too busy drinking beer instead of brewing it.</em>
+{% endfor %}</div>
+
+
+{% else %}
+{% for entry in entries %}
+{% if not entry.private %}
+<div class="well">
+<h2>{{ entry.title }}</h2>
+<h4><i>{{ entry.subhed|safe }}</i></h4>
+<p>{{ entry.text|safe }}</p>
+<p>By <a href="http://www.twitter.com/{{entry.twitter}}">{{ entry.user }}</a> on {{ entry.month }}/{{entry.day}}/{{entry.year}}</p>
+<p>Stage: {{ entry.stage }}</p>
+<a href="/entries/{{ "%s/%s"|format(entry.year, entry.month)+"/"+entry.slug }}.html">Permalink</a>
+
+</div>
+{% endif %}
+{% else %}
+<center><em>Unbelievable. No entries here so far. Must be too busy drinking beer instead of brewing it.</em></center>
+
+</div>
+
+{% endfor %}
+{% endif %}
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="span1">
+</div>
+<div class="span2">
+{% if entries.older %}
+<a href="/{{entries.older}}/"><< older</a>
+{% endif %}
+</div>
+<div class="span5">
+</div>
+<div class="span1">
+{% if entries.newer %}
+<a href="/{{entries.newer}}/"> newer>> </a>
+{% endif %}
+</div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+<center>&nbsp;
+<p class="muted credit"><a href="/colophon.html">Colophon</a></center>
+</p>
+{% endblock %}

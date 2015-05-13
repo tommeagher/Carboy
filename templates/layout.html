@@ -1,0 +1,98 @@
+<!doctype html>
+<head>
+<title>Carboy, a homebrewing blog</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-responsive.css') }}">
+<style type="text/css">
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #fffffff;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    </style>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2450819-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<div class="span12">
+<center><h1><a style="text-decoration:none; color:#000000" href="/">Carboy</a></h1></center>
+<center> <h4>My homebrewing misadventures</h4></center>
+<ul class="nav nav-list">
+  <li class="divider"></li>
+</ul>
+</div>
+</div>
+<div class="row">
+<div class="span2"></div>
+<div class="span8">  
+</div>
+<!-- <div class=page> -->
+<div class="span2">
+<!--  <div class=metanav> -->
+
+</div></div>
+
+
+<div class="row">
+<div class="span1"></div>
+<div class="span9">
+{% block body %} {% endblock %}</div>
+</div>
+
+
+</div>
+
+
+</div>
+    <div id="footer">
+      <div class="container">
+      {% block footer %} {% endblock %}
+      </div>
+    </div>
+</div>
+</body>
+</html>

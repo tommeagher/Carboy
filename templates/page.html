@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+<div class="span9">
+<h2>{{ page.title }}</h2>
+<p>{{ page.text|safe }}</p>
+
+{% if session.logged_in %}
+<p>>><a href="/admin/page/{{ page.id }}">Edit this page</a><<</p>
+{% endif %}
+
+</div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% if not page.slug=='colophon' %}
+<center>&nbsp;
+<p class="muted credit"><a href="/colophon.html">Colophon</a></center>
+</p>
+{% endif %}
+{% endblock %}

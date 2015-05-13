@@ -12,4 +12,4 @@ class BaseModel(Model):
     class Meta:
         database = psql_db
 
-app.debug=True
+app.debug=os.environ.get('CARBOY_DEBUG')

@@ -1,3 +1,4 @@
 local_settings.py
 *.pyc
 test.db
+.DS_Store

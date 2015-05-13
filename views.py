@@ -3,9 +3,8 @@ from flask import Flask, request, session, g, redirect, url_for, \
 import re
 from datetime import date, datetime
 
-from peewee import *
 from app import app, psql_db
-#import auth
+from auth import auth
 from models import User, Entry, Page
 from admin import admin
 from math import ceil
@@ -62,10 +61,13 @@ def calc_entries():
         pagecount=1
     return pagecount
 
-@app.route('/<pagenum>/')
+@app.route('/entry-list/<pagenum>/')
 def new_page(pagenum):
-    page = int(pagenum)
-    return show_entries(page=pagenum)
+    if pagenum=='admin':
+        return redirect(url_for(admin))
+    else:
+        pagenum=int(pagenum)
+        return show_entries(page=pagenum)
     
 @app.route('/<pagename>.html')
 def show_page(pagename):
@@ -76,7 +78,8 @@ def show_page(pagename):
         else:
             return render_template('page.html', page=page)
     except:
-        abort(404)
+        return pagename
+        #abort(404)
 
 @app.route('/entries/<year>/<month>/<slug>.html')
 def show_entry(slug, year, month):

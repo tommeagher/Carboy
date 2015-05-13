@@ -1,5 +1,5 @@
 from app import app, psql_db
-#from auth import *
+from auth import *
 from admin import admin
 from models import *
 from views import *

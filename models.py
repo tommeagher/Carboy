@@ -1,6 +1,7 @@
 import datetime
 import re
 from peewee import *
+from flask_peewee.auth import BaseUser
 
 from app import psql_db, BaseModel
 
@@ -10,16 +11,29 @@ def slugify(string):
     string = "-".join(string.lower().strip().split())
     return string
 
-class User(BaseModel):
+class User(BaseModel, BaseUser):
     username = CharField()
-    user_last=CharField()
-    user_first=CharField()
+    user_first=CharField(verbose_name="First name")
+    user_last=CharField(verbose_name="Last name")
     password = CharField()
     email = CharField()
     twitter = CharField(null=True)
     join_date = DateTimeField(default=datetime.datetime.now)
     active = BooleanField(default=True)
     admin = BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        # Add a URL-friendly representation of the entry's title.
+        if self.twitter:
+            if self.twitter[0]=='@':
+                self.twitter = self.twitter[1:]
+            else:
+                self.twitter = self.twitter
+            self.set_password(self.password)
+        else:
+            self.set_password(self.password)            
+        ret = super(User, self).save(*args, **kwargs)
+        return ret
 
     def __unicode__(self):
         return self.username

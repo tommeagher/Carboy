@@ -4,6 +4,11 @@
 <div class="span9">
 <h2>{{ page.title }}</h2>
 <p>{{ page.text|safe }}</p>
+
+{% if session.logged_in %}
+<p>>><a href="/admin/page/{{ page.id }}">Edit this page</a><<</p>
+{% endif %}
+
 </div>
 </div>
 {% endblock %}

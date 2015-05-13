@@ -3,28 +3,46 @@
 <div class="container">
 <div class="span9">
 <div class="well">
-{% if entry.private %}
 {% if session.logged_in %}
+
+{% if entry.private %}
 <h2>{{ entry.title }}</h2>
 <h4><i>{{ entry.subhed|safe }}</i></h4><br>
 <p>{{ entry.text|safe }}</p>
 <p>By <a href="http://www.twitter.com/{{entry.twitter}}">{{ entry.user }}</a> on {{ entry.month }}/{{entry.day}}/{{entry.year}}</p>
 <p>Stage: {{ entry.stage }}</p>
-<font color="red">Private</font></p>
+<h4><font color="red">PRIVATE</font></h4>
+<br>
+<p>>><a href="/admin/entry/{{ entry.id }}">Edit this entry</a><<</p>
 <br>
 <a href="/">Back to the rest of the entries.</a>
-{% else %}
-<em>So sorry. You must be logged in to view a private entry. Try again.</em>
-{% endif %}
+
 {% elif entry.private == False %}
 <h2>{{ entry.title }}</h2>
 <h4><i>{{ entry.subhed|safe }}</i></h4><br>
 <p>{{ entry.text|safe }}</p>
+<p>By <a href="http://www.twitter.com/{{entry.twitter}}">{{ entry.user }}</a> on {{ entry.month }}/{{ entry.day }}/{{ entry.year }}</p>
+<p>Stage: {{ entry.stage }}</p>
+<br>
+<p>>><a href="/admin/entry/{{ entry.id }}">Edit this entry</a><<</p>
+<br>
+<a href="/">Back to the rest of the entries.</a>
+{% endif %}
+
+{% elif entry.private %}
+<em>So sorry. You must be logged in to view a private entry. Try again.</em>
+
+{% else %}
+<h2>{{ entry.title }}</h2>
+<h4><i>{{ entry.subhed|safe }}</i></h4><br>
+<p>{{ entry.text|safe }}</p>
 <p>By <a href="http://www.twitter.com/{{entry.twitter}}">{{ entry.user }}</a> on {{ entry.month }}/{{entry.day}}/{{entry.year}}</p>
 <p>Stage: {{ entry.stage }}</p>
 <br>
 <a href="/">Back to the rest of the entries.</a>
 {% endif %}
+
+
 </div>
 </div>
 </div>

@@ -7,8 +7,56 @@
 
 {% if entry.private %}
 <h2>{{ entry.title }}</h2>
-<h4><i>{{ entry.subhed|safe }}</i></h4><br>
+{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4><br />{% endif %}
 <p>{{ entry.text|safe }}</p>
+
+{% if entry.recipe %} {{ entry.recipe }} {% endif %}{% if entry.recipe %} 
+<div class="well">
+{% if entry.recipe.recipe_URL %}
+<h2><a href="/recipes/{{entry.recipe.slug}}.html">Recipe for {{entry.recipe.title}}</a></h2>
+{% else %}
+<h2>{{ entry.recipe.title }}</h2>
+{% endif %}
+<h3>{{ entry.recipe.style }}, {{ entry.recipe.brew_type }}</h3>
+<h4>{{ entry.recipe.batch_size }} gallon batch</h4>
+<strong>Ingredients</strong>
+<p>Grains <br />
+{{ entry.recipe.grains|safe }}</p>
+<p>Hops <br />
+{{ entry.recipe.hops|safe }}</p>
+{% if entry.recipe.adjuncts %}
+Adjuncts: <br />{{ entry.recipe.adjuncts }}
+{% endif %}
+<p>Yeasts <br />{{ entry.recipe.yeasts|safe }}</p>
+<a href="{{entry.recipe.recipe_URL}}">Original recipe</a> from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+<h4>Mash schedule</h4>
+{% if entry.recipe.mash %} <p> {{ entry.recipe.mash|safe }}</p> {% endif %}
+
+{% if entry.recipe.fermentation %}
+<h4>Fermentation schedule </h4>
+{{ entry.recipe.fermentation|safe }}</p>
+{% endif %}
+
+{% if entry.recipe.abv or entry.recipe.ibu or entry.recipe.other_stats %}
+<h4> Stats</h4>
+<ul>
+{% if entry.recipe.abv %}<li>ABV: {{ entry.recipe.abv }} percent</li>{% endif %}
+{% if entry.recipe.ibu %}<li>IBU: {{ entry.recipe.ibu }}</li>{% endif %}
+
+{% if entry.recipe.other_stats %}
+{{ entry.recipe.other_stats|safe }}
+{% endif %}
+
+</ul>
+<p>Stats by iBrewmaster</p>
+{% endif %}
+{% if entry.recipe.description %}<h4>Other notes</h4><p>{{ entry.recipe.description|safe }}</p>{% endif %}
+
+
+</div>
+
+{% endif %}
+
 <p>By <a href="http://www.twitter.com/{{entry.twitter}}">{{ entry.user.user_first }}</a> on {{ entry.month }}/{{entry.day}}/{{entry.year}}</p>
 <p>Stage: {{ entry.stage }}</p>
 <h4><font color="red">PRIVATE</font></h4>
@@ -19,8 +67,55 @@
 
 {% elif entry.private == False %}
 <h2>{{ entry.title }}</h2>
-<h4><i>{{ entry.subhed|safe }}</i></h4><br>
+{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4><br />{% endif %}
 <p>{{ entry.text|safe }}</p>
+
+{% if entry.recipe %} 
+<div class="well">
+{% if entry.recipe.recipe_URL %}
+<h2><a href="/recipes/{{entry.recipe.slug}}.html">Recipe for {{entry.recipe.title}}</a></h2>
+{% else %}
+<h2>{{ entry.recipe.title }}</h2>
+{% endif %}
+<h3>{{ entry.recipe.style }}, {{ entry.recipe.brew_type }}</h3>
+<h4>{{ entry.recipe.batch_size }} gallon batch</h4>
+<strong>Ingredients</strong>
+<p>Grains <br />
+{{ entry.recipe.grains|safe }}</p>
+<p>Hops <br />
+{{ entry.recipe.hops|safe }}</p>
+{% if entry.recipe.adjuncts %}
+Adjuncts: <br />{{ entry.recipe.adjuncts }}
+{% endif %}
+<p>Yeasts <br />{{ entry.recipe.yeasts|safe }}</p>
+<a href="{{entry.recipe.recipe_URL}}">Original recipe</a> from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+<h4>Mash schedule</h4>
+{% if entry.recipe.mash %} <p> {{ entry.recipe.mash|safe }}</p> {% endif %}
+
+{% if entry.recipe.fermentation %}
+<h4>Fermentation schedule </h4>
+{{ entry.recipe.fermentation|safe }}</p>
+{% endif %}
+
+{% if entry.recipe.abv or entry.recipe.ibu or entry.recipe.other_stats %}
+<h4> Stats</h4>
+<ul>
+{% if entry.recipe.abv %}<li>ABV: {{ entry.recipe.abv }} percent</li>{% endif %}
+{% if entry.recipe.ibu %}<li>IBU: {{ entry.recipe.ibu }}</li>{% endif %}
+
+{% if entry.recipe.other_stats %}
+{{ entry.recipe.other_stats|safe }}
+{% endif %}
+
+</ul>
+<p>Stats by iBrewmaster</p>
+{% endif %}
+{% if entry.recipe.description %}<h4>Other notes</h4><p>{{ entry.recipe.description|safe }}</p>{% endif %}
+
+</div>
+
+{% endif %}
+
 <p>By <a href="http://www.twitter.com/{{entry.twitter}}">{{ entry.user.user_first }}</a> on {{ entry.month }}/{{ entry.day }}/{{ entry.year }}</p>
 <p>Stage: {{ entry.stage }}</p>
 <br>
@@ -34,8 +129,56 @@
 
 {% else %}
 <h2>{{ entry.title }}</h2>
-<h4><i>{{ entry.subhed|safe }}</i></h4><br>
+{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4><br />{% endif %}
 <p>{{ entry.text|safe }}</p>
+
+{% if entry.recipe %} 
+<div class="well">
+{% if entry.recipe.recipe_URL %}
+<h2><a href="/recipes/{{entry.recipe.slug}}.html">Recipe for {{entry.recipe.title}}</a></h2>
+{% else %}
+<h2>{{ entry.recipe.title }}</h2>
+{% endif %}
+<h3>{{ entry.recipe.style }}, {{ entry.recipe.brew_type }}</h3>
+<h4>{{ entry.recipe.batch_size }} gallon batch</h4>
+<strong>Ingredients</strong>
+<p>Grains <br />
+{{ entry.recipe.grains|safe }}</p>
+<p>Hops <br />
+{{ entry.recipe.hops|safe }}</p>
+{% if entry.recipe.adjuncts %}
+Adjuncts: <br />{{ entry.recipe.adjuncts }}
+{% endif %}
+<p>Yeasts <br />{{ entry.recipe.yeasts }}</p>
+<a href="{{entry.recipe.recipe_URL}}">Original recipe</a> from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+<h4>Mash schedule</h4>
+{% if entry.recipe.mash %} <p> {{ entry.recipe.mash|safe }}</p> {% endif %}
+
+{% if entry.recipe.fermentation %}
+<h4>Fermentation schedule </h4>
+{{ entry.recipe.fermentation|safe }}</p>
+{% endif %}
+
+{% if entry.recipe.abv or entry.recipe.ibu or entry.recipe.other_stats %}
+<h4> Stats</h4>
+<ul>
+{% if entry.recipe.abv %}<li>ABV: {{ entry.recipe.abv }} percent</li>{% endif %}
+{% if entry.recipe.ibu %}<li>IBU: {{ entry.recipe.ibu }}</li>{% endif %}
+
+{% if entry.recipe.other_stats %}
+{{ entry.recipe.other_stats|safe }}
+{% endif %}
+
+</ul>
+<p>Stats by iBrewmaster</p>
+{% endif %}
+{% if entry.recipe.description %}<h4>Other notes</h4><p>{{ entry.recipe.description|safe }}</p>{% endif %}
+
+
+</div>
+
+{% endif %}
+
 <p>By <a href="http://www.twitter.com/{{entry.twitter}}">{{ entry.user.user_first }}</a> on {{ entry.month }}/{{entry.day}}/{{entry.year}}</p>
 <p>Stage: {{ entry.stage }}</p>
 <br>
@@ -49,7 +192,10 @@
 {% endblock %}
 
 {% block footer %}
+
 <center>&nbsp;
-<p class="muted credit"><a href="/colophon.html">Colophon</a></center>
+<p class="muted credit"><a href="/recipes/">Recipes</a> | <a href="/colophon.html">Colophon</a>
+</center>
 </p>
+
 {% endblock %}

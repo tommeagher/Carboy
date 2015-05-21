@@ -5,7 +5,7 @@ from datetime import date, datetime
 
 from app import app, psql_db
 from auth import auth
-from models import User, Entry, Page
+from models import User, Entry, Page, Recipe
 from admin import admin
 from math import ceil
 
@@ -25,7 +25,7 @@ def page_not_found(error):
     
 @app.route('/')
 def show_entries(page=1):
-    perpage=10
+    pagecount, perpage = calc_entries()
     entries = Entry.select().order_by(-Entry.publishdate).paginate(int(page), perpage)
 
     for entry in entries:
@@ -40,7 +40,7 @@ def show_entries(page=1):
         else:
             entry.day=entry.publishdate.day
         entry.twitter = User.get(User.id==entry.user).twitter
-    pagecount=calc_entries()
+    
     page=int(page)
     if page>1:
         entries.newer=page-1
@@ -59,7 +59,7 @@ def calc_entries():
         pagecount = ceil(entrycount/float(paginate))
     else:
         pagecount=1
-    return pagecount
+    return pagecount, paginate
 
 @app.route('/entry-list/<pagenum>/')
 def new_page(pagenum):
@@ -68,17 +68,6 @@ def new_page(pagenum):
     else:
         pagenum=int(pagenum)
         return show_entries(page=pagenum)
-    
-@app.route('/<pagename>.html')
-def show_page(pagename):
-    try:
-        page = Page.get(Page.slug==str(pagename))
-        if page is None:
-            abort(404)
-        else:
-            return render_template('page.html', page=page)
-    except:
-        abort(404)
 
 @app.route('/entries/<year>/<month>/<slug>.html')
 def show_entry(slug, year, month):
@@ -98,3 +87,66 @@ def show_entry(slug, year, month):
         abort(404)
     else:
         return render_template('entry.html', entry=entry)
+
+@app.route('/recipes/')
+def show_recipes(page=1):
+    pagecount, perpage=calc_recipes()
+    recipes = Recipe.select().order_by(Recipe.title).paginate(int(page), perpage)
+
+    page=int(page)
+    if page>1:
+        recipes.newer=page-1
+    else:
+        recipes.newer=None
+    if pagecount>page:
+        recipes.older=page+1
+    else:
+        recipes.older=None
+    return render_template('show_recipes.html', recipes=recipes)
+
+def calc_recipes():
+    paginate=25
+    recipecount = Recipe.select().count()
+    if recipecount>paginate:
+        pagecount = ceil(recipecount/float(paginate))
+    else:
+        pagecount=1
+    return pagecount, paginate
+
+@app.route('/recipe-list/<pagenum>/')
+def new_recipe_page(pagenum):
+    if pagenum=='admin':
+        return redirect(url_for(admin))
+    else:
+        pagenum=int(pagenum)
+        return show_recipes(page=pagenum)
+    
+@app.route('/recipes/<slug>.html')
+def show_recipe(slug):
+    recipe = Recipe.select().where(Recipe.slug==slug).get()
+
+    recipe.year = recipe.added_date.year
+    if len(str(recipe.added_date.month))==1:
+        recipe.month="0"+str(recipe.added_date.month)
+    else:
+        recipe.month=recipe.added_date.month
+    if len(str(recipe.added_date.day))==1:
+        recipe.day="0"+str(recipe.added_date.day)
+    else:
+        recipe.day=recipe.added_date.day
+
+    if recipe is None:
+        abort(404)
+    else:
+        return render_template('recipe.html', recipe=recipe)
+
+@app.route('/<pagename>.html')
+def show_page(pagename):
+    try:
+        page = Page.get(Page.slug==str(pagename))
+        if page is None:
+            abort(404)
+        else:
+            return render_template('page.html', page=page)
+    except:
+        abort(404)

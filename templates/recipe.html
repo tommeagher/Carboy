@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+<div class="span9">
+<div class="well">
+
+{% if recipe.recipe_URL %}
+<h2>{{recipe.title}}</h2>
+{% else %}
+<h2>{{ recipe.title }}</h2>
+{% endif %}
+<h3>{{ recipe.style }}, {{ recipe.brew_type }}</h3>
+<h4>{{ recipe.batch_size }} gallon batch</h4>
+<strong>Ingredients</strong>
+<p>Grains <br />
+{{ recipe.grains|safe }}</p>
+<p>Hops <br />
+{{ recipe.hops|safe }}</p>
+{% if recipe.adjuncts %}
+Adjuncts: <br />{{ recipe.adjuncts }}
+{% endif %}
+<p>Yeasts <br />{{ recipe.yeasts|safe }}</p>
+<p><a href="{{recipe.recipe_URL}}">Original recipe</a> from <a href="{{recipe.source_URL}}">{{ recipe.source }}</a></p>
+<h4>Mash schedule</h4>
+{% if recipe.mash %} <p> {{ recipe.mash|safe }}</p> {% endif %}
+
+{% if recipe.fermentation %}
+<h4>Fermentation schedule </h4>
+{{ recipe.fermentation|safe }}</p>
+{% endif %}
+
+{% if recipe.abv or recipe.ibu or recipe.other_stats %}
+<h4> Stats</h4>
+<ul>
+{% if recipe.abv %}<li>ABV: {{ recipe.abv }} percent</li>{% endif %}
+{% if recipe.ibu %}<li>IBU: {{ recipe.ibu }}</li>{% endif %}
+
+{% if recipe.other_stats %}
+{{ recipe.other_stats|safe }}
+{% endif %}
+
+</ul>
+<p>Stats by iBrewmaster</p>
+{% endif %}
+{% if recipe.description %}<h4>Other notes</h4><p>{{ recipe.description|safe }}</p>{% endif %}
+<br />
+<p>Added on {{recipe.month }}/{{ recipe.day }}/{{ recipe.year }} </p>
+<br />
+{% if session.logged_in %}
+<p>>><a href="/admin/recipe/{{ recipe.id }}">Edit this recipe.</a><<</p>
+{% endif %}
+
+
+<br>
+<a href="/recipes/">Back to the rest of the recipes</a>
+
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<center>&nbsp;
+<p class="muted credit"><a href="/colophon.html">Colophon</a></center>
+</p>
+{% endblock %}

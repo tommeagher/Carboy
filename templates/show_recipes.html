@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container-fluid">
+
+<div class="row">
+<div class="span9">
+<center><h1>Tom's Homebrew Recipes</h1></center>
+<div class="span2"></div>
+<div class="span5">
+<ul>
+{% for recipe in recipes %}
+
+<li><h3><a href="/recipes/{{ recipe.slug }}.html">{{ recipe.title }}</a>, {{ recipe.style }}</h3></li>
+
+{% else %}
+<br />
+<p><center><em>Unbelievable. There are no recipes here so far. Must be too busy drinking beer instead of brewing it.</em></center></p>
+<br />
+{% endfor %}
+
+</ul>
+</div>
+
+
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="span1">
+</div>
+
+<div class="span2">
+{% if recipes.older %}
+<a href="/recipe-list/{{recipes.older}}/"><< older</a>
+{% endif %}
+</div>
+<div class="span5">
+</div>
+<div class="span1">
+{% if recipes.newer %}
+<a href="/recipe-list/{{recipes.newer}}/"> newer>> </a>
+{% endif %}
+</div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+<center>&nbsp;
+<p class="muted credit"><a href="/colophon.html">Colophon</a></center>
+</p>
+{% endblock %}

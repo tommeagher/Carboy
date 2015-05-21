@@ -14,9 +14,12 @@
 {% endblock %}
 
 {% block footer %}
-{% if not page.slug=='colophon' %}
+
+
 <center>&nbsp;
-<p class="muted credit"><a href="/colophon.html">Colophon</a></center>
+<p class="muted credit"><a href="/recipes/">Recipes</a> {% if not page.slug=='colophon' %}| <a href="/colophon.html">Colophon</a>{% endif %}
+</center>
 </p>
-{% endif %}
+
+
 {% endblock %}

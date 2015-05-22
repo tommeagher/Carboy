@@ -5256,7 +5256,7 @@ button.close {
     top: 20px;
   }
 }
-@media (max-width: 480px) {
+@media (max-device-width: 480px) {
   .nav-collapse {
     -webkit-transform: translate3d(0, 0, 0);
   }

@@ -28,7 +28,13 @@
 Adjuncts: <br />{{ entry.recipe.adjuncts }}
 {% endif %}
 <p>Yeasts <br />{{ entry.recipe.yeasts|safe }}</p>
-<a href="{{entry.recipe.recipe_URL}}">Original recipe</a> from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+{% if entry.recipe.source %}
+{% if entry.recipe.recipe_URL %}
+<a href="{{entry.recipe.recipe_URL}}">Original recipe</a>
+{% else %}
+Original recipe {% endif %}
+ from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+{% endif %}
 <h4>Mash schedule</h4>
 {% if entry.recipe.mash %} <p> {{ entry.recipe.mash|safe }}</p> {% endif %}
 
@@ -88,7 +94,14 @@ Adjuncts: <br />{{ entry.recipe.adjuncts }}
 Adjuncts: <br />{{ entry.recipe.adjuncts }}
 {% endif %}
 <p>Yeasts <br />{{ entry.recipe.yeasts|safe }}</p>
-<a href="{{entry.recipe.recipe_URL}}">Original recipe</a> from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+
+{% if entry.recipe.source %}
+{% if entry.recipe.recipe_URL %}
+<a href="{{entry.recipe.recipe_URL}}">Original recipe</a>
+{% else %}
+Original recipe {% endif %}
+ from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+{% endif %}
 <h4>Mash schedule</h4>
 {% if entry.recipe.mash %} <p> {{ entry.recipe.mash|safe }}</p> {% endif %}
 
@@ -150,7 +163,13 @@ Adjuncts: <br />{{ entry.recipe.adjuncts }}
 Adjuncts: <br />{{ entry.recipe.adjuncts }}
 {% endif %}
 <p>Yeasts <br />{{ entry.recipe.yeasts }}</p>
-<a href="{{entry.recipe.recipe_URL}}">Original recipe</a> from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+{% if entry.recipe.source %}
+{% if entry.recipe.recipe_URL %}
+<a href="{{entry.recipe.recipe_URL}}">Original recipe</a>
+{% else %}
+Original recipe {% endif %}
+ from <a href="{{entry.recipe.source_URL}}">{{ entry.recipe.source }}</a>.<br />
+{% endif %}
 <h4>Mash schedule</h4>
 {% if entry.recipe.mash %} <p> {{ entry.recipe.mash|safe }}</p> {% endif %}
 

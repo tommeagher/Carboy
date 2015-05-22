@@ -20,7 +20,14 @@
 Adjuncts: <br />{{ recipe.adjuncts }}
 {% endif %}
 <p>Yeasts <br />{{ recipe.yeasts|safe }}</p>
-<p><a href="{{recipe.recipe_URL}}">Original recipe</a> from <a href="{{recipe.source_URL}}">{{ recipe.source }}</a></p>
+{% if recipe.source %}
+{% if recipe.recipe_URL %}
+<p><a href="{{recipe.recipe_URL}}">Original recipe</a>
+{% else %}
+Original recipe {% endif %}
+ from <a href="{{recipe.source_URL}}">{{ recipe.source }}</a></p>
+{% endif %}
+
 <h4>Mash schedule</h4>
 {% if recipe.mash %} <p> {{ recipe.mash|safe }}</p> {% endif %}
 

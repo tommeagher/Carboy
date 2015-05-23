@@ -6,7 +6,7 @@ from models import *
 from app import app, psql_db
 
 class EntryAdmin(ModelAdmin):
-    columns = ('title', 'publishdate', 'private')
+    columns = ('title', 'publishdate', 'recipe', 'private')
     def get_query(self):
     	return Entry.select().order_by(-Entry.publishdate)
 

@@ -162,7 +162,7 @@ Original recipe {% endif %}
 {% if entry.recipe.adjuncts %}
 Adjuncts: <br />{{ entry.recipe.adjuncts }}
 {% endif %}
-<p>Yeasts <br />{{ entry.recipe.yeasts }}</p>
+<p>Yeasts <br />{{ entry.recipe.yeasts|safe }}</p>
 {% if entry.recipe.source %}
 {% if entry.recipe.recipe_URL %}
 <a href="{{entry.recipe.recipe_URL}}">Original recipe</a>

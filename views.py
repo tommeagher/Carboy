@@ -1,13 +1,16 @@
+from urlparse import urljoin
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash
 import re
 from datetime import date, datetime
 
+from werkzeug.contrib.atom import AtomFeed
 from app import app, psql_db
 from auth import auth
 from models import User, Entry, Page, Recipe
 from admin import admin
 from math import ceil
+
 
 #create db connections for functions
 @app.before_request
@@ -150,3 +153,23 @@ def show_page(pagename):
             return render_template('page.html', page=page)
     except:
         abort(404)
+
+@app.route('/recent.atom')
+def recent_feed():
+    feed=AtomFeed('Recent Posts',
+        feed_url=request.url, url=request.url_root)
+    posts = Entry.select().order_by(-Entry.publishdate).limit(15)
+    for post in posts:
+        post.year = post.publishdate.year
+        if len(str(post.publishdate.month))==1:
+            post.month="0"+str(post.publishdate.month)
+        else:
+            post.month=post.publishdate.month
+
+        feed.add(post.title, unicode(post.text), content_type='html',
+            author = post.user.user_first+' '+post.user.user_last,
+            url = 'http://carboy.tommeagher.com/entries/{0}/{1}/{2}'.format(post.year, post.month, post.slug),
+            published = datetime.combine(post.publishdate, datetime.min.time()), updated=datetime.combine(post.publishdate, datetime.min.time()))
+
+    return feed.get_response()
+

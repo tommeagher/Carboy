@@ -168,7 +168,7 @@ def recent_feed():
 
         feed.add(post.title, unicode(post.text), content_type='html',
             author = post.user.user_first+' '+post.user.user_last,
-            url = 'http://carboy.tommeagher.com/entries/{0}/{1}/{2}'.format(post.year, post.month, post.slug),
+            url = 'http://carboy.tommeagher.com/entries/{0}/{1}/{2}.html'.format(post.year, post.month, post.slug),
             published = datetime.combine(post.publishdate, datetime.min.time()), updated=datetime.combine(post.publishdate, datetime.min.time()))
 
     return feed.get_response()

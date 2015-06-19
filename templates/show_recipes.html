@@ -1,16 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="container-fluid">
-
-<div class="row">
-<div class="span9">
+<div class="row-fluid">
+<div class="span12">
 <center><h1>Tom's Homebrew Recipes</h1></center>
+</div>
+</div>
+
+<div class="row-fluid">
 <div class="span2"></div>
-<div class="span5">
+<div class="span7">
 <ul>
 {% for recipe in recipes %}
 
-<li><h3><a href="/recipes/{{ recipe.slug }}.html">{{ recipe.title }}</a>, {{ recipe.style }}</h3></li>
+<li><h3><a href="/recipes/{{ recipe.slug }}.html">{{ recipe.title }}</a>, <span>{{ recipe.style }}, {{ recipe.batch_size }} gal.</span></h3></li>
 
 {% else %}
 <br />

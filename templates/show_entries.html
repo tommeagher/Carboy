@@ -3,7 +3,7 @@
 <div class="container-fluid">
 
 <div class="row">
-<div class="span9">
+<div class="span10">
 {% if session.logged_in %}
 {% for entry in entries %}
 <div class="well">
@@ -61,7 +61,7 @@
 <a href="/entry-list/{{entries.older}}/"><< older</a>
 {% endif %}
 </div>
-<div class="span5">
+<div class="span6">
 </div>
 <div class="span1">
 {% if entries.newer %}

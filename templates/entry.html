@@ -7,7 +7,7 @@
 
 {% if entry.private %}
 <h2>{{ entry.title }}</h2>
-{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4><br />{% endif %}
+{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4>{% endif %}
 <p>{{ entry.text|safe }}</p>
 
 {% if entry.recipe %} {{ entry.recipe }} {% endif %}{% if entry.recipe %} 
@@ -73,7 +73,7 @@ Original recipe {% endif %}
 
 {% elif entry.private == False %}
 <h2>{{ entry.title }}</h2>
-{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4><br />{% endif %}
+{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4>{% endif %}
 <p>{{ entry.text|safe }}</p>
 
 {% if entry.recipe %} 
@@ -142,7 +142,7 @@ Original recipe {% endif %}
 
 {% else %}
 <h2>{{ entry.title }}</h2>
-{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4><br />{% endif %}
+{% if entry.subhed %}<h4><i>{{ entry.subhed|safe }}</i></h4>{% endif %}
 <p>{{ entry.text|safe }}</p>
 
 {% if entry.recipe %} 
